@@ -39,14 +39,20 @@ if(employee_data.length<1){
 
         return(
     <>
-    <div>hello</div>
-    <button onClick={home} >New Entry!!</button>
+    <h1>Employee Data</h1>
+    <button id="new-entry" onClick={home} >New Entry!!</button>
     {loading && <h1>Loading Data...</h1>}
     
   
    
  
             <table className="Data">
+              <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Age</th>
+                <th>Salary</th>
+              </tr>
                 {employee_data.map((product)=>{
                 return <Data
                 Edata={product} 

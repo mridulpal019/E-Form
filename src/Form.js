@@ -15,44 +15,6 @@ const Form=()=>{
   const navigate=useNavigate();
   const db=firebase.firestore();
 
-    // constructor(){
-    //     super();
-    //     this.state={
-    //        firstname:'',
-    //        lastname:'',
-    //        age:undefined,
-    //        salary:undefined,
-    //     } 
-    //     this.db=firebase.firestore();
-      
-
-       
-    // }
-   
-
-    
-    
-  
-    // handleFirstName=(e)=>{
-    //     this.setState({
-    //         firstname:e.target.value
-    //     })
-    // }
-    // handleLastName=(e)=>{
-    //     this.setState({
-    //         lastname:e.target.value
-    //     })
-    // }
-    // handleAge=(e)=>{
-    //     this.setState({
-    //         age:e.target.value
-    //     })
-    // }
-    // handleSalary=(e)=>{
-    //     this.setState({
-    //         salary:e.target.value
-    //     })
-    // }
     const clearData=(e)=>{
       e.preventDefault();
       setFirstName('');
@@ -64,6 +26,7 @@ const Form=()=>{
     const Datasubmit=async(e)=>{
         e.preventDefault();
         console.log(firstname,lastname,age,salary);
+        if(firstname != '' && lastname!= '' && age!= '' && salary != ''){
         const res = await db.collection('employee').add({
           firstname: firstname,
           lastname:lastname,
@@ -85,14 +48,15 @@ const Form=()=>{
      
     });
     navigate('/Display')
+  }else{
+    alert('Kindly Fill all the Information')
+  }
   }
   const backHome=(e)=>{
     e.preventDefault()
     navigate('/Display')
   }
   
-    // }
-    //     render(){
         return (
             <div className="Form">
                 <h1>Employee Form</h1>
@@ -102,11 +66,10 @@ const Form=()=>{
             <div className="value">
               <input
                 type="text"
-                placeholder="Mahendra"
+                placeholder="First Name"
                 required
                 value={firstname}
                 onChange={(event) => setFirstName(event.target.value)}
-                // onChange={this.handleFirstName}
               />
             </div>
           </div>
@@ -116,10 +79,9 @@ const Form=()=>{
             <div className="value">
             <input
                 type="text"
-                placeholder="Dhoni"
+                placeholder="Last Name"
                 required
                value={lastname}
-              //  onChange={this.handleLastName}
                onChange={(event) => setLastName(event.target.value)}
               />
             </div>
@@ -129,7 +91,7 @@ const Form=()=>{
             <div className="heading">Age</div>
             <div className="value">
              <input type='number'
-             placeholder="14"
+             placeholder="Age"
              value={age} 
              onChange={(event) => setAge(event.target.value)}></input>
             </div>
@@ -138,7 +100,7 @@ const Form=()=>{
             <div className="heading">Salary</div>
             <div className="value">
              <input type='number'
-                  placeholder="14000"
+                  placeholder="Salary"
                   value={salary}
                   onChange={(event) => setSalary(event.target.value)}
                   ></input>
@@ -153,10 +115,10 @@ const Form=()=>{
           
         </form>
         <button onClick={clearData}>Clear</button>
-        <button onClick={backHome}>Back</button>
+        <button onClick={backHome}>All Employee data </button>
             </div>
         )
          } 
-        // }
+
 
 export default Form;

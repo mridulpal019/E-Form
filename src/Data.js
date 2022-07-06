@@ -32,13 +32,13 @@ const Data=(props)=>{
 
     }
         return(
-            <tr>
+            <tr className="card">
             <td>{firstname}</td>
             <td>{lastname}</td>
             <td>{age}</td>
             <td>{salary}</td>
-            <td><button onClick={editPage}>Edit</button></td>
-            <td><button onClick={deleteData}>delete</button></td>
+            <td><button onClick={editPage} className='edit-button'>Edit</button></td>
+            <td><button onClick={deleteData} className="del-button">Delete</button></td>
           </tr>
         
     )

@@ -31,7 +31,6 @@ const [firstname, setFirstName] = useState("");
         return data;
       }
       );
-      // console.log(typeof(employe_data),employe_data[0].firstname,'ee')
       SetEmpData(employe_data)
       setFirstName(employe_data[0].firstname)
 
@@ -46,13 +45,11 @@ const [firstname, setFirstName] = useState("");
  }
 
 
-    // console.log(emp_data[0].lastname,'last')
 
   
 
     const Datasubmit=async(e)=>{
         e.preventDefault();
-        // console.log(firstname,lastname,age,salary);
         if(firstname != '' && lastname!= '' && age!= '' && salary != ''){
         const docRef=db.collection('employee').doc(id);
  
@@ -70,14 +67,6 @@ const [firstname, setFirstName] = useState("");
           console.log('err',err);
       
         })
-        // const res = await db.collection('employee').add({
-        //   firstname: firstname,
-        //   lastname:lastname,
-        //   age:Number(age),
-        //   salary:Number(salary)
-        // });
-        // console.log('Added document with ID: ', res.id);
-       
    
     navigate('/Display')
       }else{
@@ -90,11 +79,9 @@ const [firstname, setFirstName] = useState("");
     navigate('/Display')
   }
   
-    // }
-    //     render(){
         return (
             <div className="Form">
-                <h1>Employee Form</h1>
+                <h1>Edit Employee Form</h1>
                 <form className="details-section">
           <div className="name">
             <div className="heading">First Name</div>
@@ -105,7 +92,6 @@ const [firstname, setFirstName] = useState("");
                 required
                 value={firstname}
                 onChange={(event) => setFirstName(event.target.value)}
-                // onChange={this.handleFirstName}
               />
             </div>
           </div>
@@ -118,7 +104,7 @@ const [firstname, setFirstName] = useState("");
                 placeholder="Loading.."
                 required
                value={lastname}
-              //  onChange={this.handleLastName}
+
                onChange={(event) => setLastName(event.target.value)}
               />
             </div>
