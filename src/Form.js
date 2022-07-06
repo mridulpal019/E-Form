@@ -53,7 +53,14 @@ const Form=()=>{
     //         salary:e.target.value
     //     })
     // }
+    const clearData=(e)=>{
+      e.preventDefault();
+      setFirstName('');
+      setLastName('');
+      setSalary(Number());
+      setAge(Number());
 
+    }
     const Datasubmit=async(e)=>{
         e.preventDefault();
         console.log(firstname,lastname,age,salary);
@@ -77,6 +84,10 @@ const Form=()=>{
       });
      
     });
+    navigate('/Display')
+  }
+  const backHome=(e)=>{
+    e.preventDefault()
     navigate('/Display')
   }
   
@@ -141,6 +152,8 @@ const Form=()=>{
          
           
         </form>
+        <button onClick={clearData}>Clear</button>
+        <button onClick={backHome}>Back</button>
             </div>
         )
          } 

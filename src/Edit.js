@@ -31,8 +31,14 @@ const [firstname, setFirstName] = useState("");
         return data;
       }
       );
-      console.log(typeof(employe_data),employe_data[0].firstname,'ee')
+      // console.log(typeof(employe_data),employe_data[0].firstname,'ee')
       SetEmpData(employe_data)
+      setFirstName(employe_data[0].firstname)
+
+      setLastName(employe_data[0].lastname)
+      setAge(employe_data[0].age)
+      setSalary(employe_data[0].salary)
+
     })
   }
   if(emp_data.length<1){
@@ -46,16 +52,41 @@ const [firstname, setFirstName] = useState("");
 
     const Datasubmit=async(e)=>{
         e.preventDefault();
-        console.log(firstname,lastname,age,salary);
-        const res = await db.collection('employee').add({
-          firstname: firstname,
-          lastname:lastname,
-          age:Number(age),
-          salary:Number(salary)
-        });
-        console.log('Added document with ID: ', res.id);
+        // console.log(firstname,lastname,age,salary);
+        if(firstname != '' && lastname!= '' && age!= '' && salary != ''){
+        const docRef=db.collection('employee').doc(id);
+ 
+        docRef
+        .update({
+         firstname:firstname,
+         lastname:lastname,
+         age:age,
+         salary:salary
+        })
+        .then(()=>{
+          console.log('Updated')
+        })
+        .catch((err)=>{
+          console.log('err',err);
+      
+        })
+        // const res = await db.collection('employee').add({
+        //   firstname: firstname,
+        //   lastname:lastname,
+        //   age:Number(age),
+        //   salary:Number(salary)
+        // });
+        // console.log('Added document with ID: ', res.id);
        
    
+    navigate('/Display')
+      }else{
+        alert('Please Fill all details')
+      }
+  }
+
+  const backHome=(e)=>{
+    e.preventDefault()
     navigate('/Display')
   }
   
@@ -70,7 +101,7 @@ const [firstname, setFirstName] = useState("");
             <div className="value">
               <input
                 type="text"
-                placeholder="Mahendra"
+                placeholder="Loading.."
                 required
                 value={firstname}
                 onChange={(event) => setFirstName(event.target.value)}
@@ -84,7 +115,7 @@ const [firstname, setFirstName] = useState("");
             <div className="value">
             <input
                 type="text"
-                placeholder="Dhoni"
+                placeholder="Loading.."
                 required
                value={lastname}
               //  onChange={this.handleLastName}
@@ -97,7 +128,7 @@ const [firstname, setFirstName] = useState("");
             <div className="heading">Age</div>
             <div className="value">
              <input type='number'
-             placeholder="14"
+             placeholder="loading.."
              value={age} 
              onChange={(event) => setAge(event.target.value)}></input>
             </div>
@@ -106,7 +137,7 @@ const [firstname, setFirstName] = useState("");
             <div className="heading">Salary</div>
             <div className="value">
              <input type='number'
-                  placeholder="14000"
+                  placeholder="loading"
                   value={salary}
                   onChange={(event) => setSalary(event.target.value)}
                   ></input>
@@ -120,6 +151,7 @@ const [firstname, setFirstName] = useState("");
          
           
         </form>
+        <button onClick={backHome}>Back</button>
             </div>
         )
 

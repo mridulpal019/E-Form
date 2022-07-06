@@ -9,7 +9,8 @@ const Data=(props)=>{
     const {firstname ,lastname,age,salary,id} =props.Edata
     console.log(id);
     const navigate=useNavigate();
-   console.log(props,'data ke andr',firstname,lastname,age,salary)
+    const db=firebase.firestore();
+//    console.log(props,'data ke andr',firstname,lastname,age,salary)
    const editPage=(e)=>{
     e.preventDefault()
     navigate(`/Edit/?id=${id}`)
@@ -18,6 +19,16 @@ const Data=(props)=>{
    }
     const deleteData=(e)=>{
         e.preventDefault();
+        const docRef=db.collection('employee').doc(id);
+        docRef
+        .delete()
+        .then(()=>{
+          console.log('Deleted')
+        })
+        .catch((err)=>{
+          console.log('err',err);
+      
+        })
 
     }
         return(
